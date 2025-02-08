@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: pink;
+            overflow: hidden;
+        }
+        .container {
+            margin-top: 100px;
+            position: relative;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: red;
+        }
+        .btn {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .yes {
+            background-color: red;
+            color: white;
+            position: relative;
+            z-index: 10;
+        }
+        .no {
+            background-color: white;
+            color: black;
+            position: absolute;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <img id="startGif" src="https://raw.githubusercontent.com/TroyTunner/Valentine/main/Rilakkuma%20Gif.gif" alt="Rilakkuma GIF" width="250">
+        <h1 id="question">Will you be my Valentine? 💖</h1>
+        <button id="yesButton" class="btn yes" onclick="showLove()">Yes</button>
+        <button id="noButton" class="btn no" onmouseover="moveButton()" onclick="trackNoClicks()">No</button>
+        <p id="response" style="font-size: 1.5em; color: red; margin-top: 20px;"></p>
+        <p id="noResponse" style="font-size: 1.5em; color: red; margin-top: 20px; display: none;">It's okay if you don't wanna be my Valentine, I just thought you should know that you are pretty. 😊</p>
+        <img id="loveGif" src="https://raw.githubusercontent.com/TroyTunner/Valentine/main/cute-bears-love.gif" alt="Cute Bears Love" width="250" style="display: none;">
+        <img id="sadGif" src="https://github.com/TroyTunner/Valentine/blob/main/sad-bear-cry.gif?raw=true" alt="Sad Bear Cry" width="250" style="display: none;">
+    </div>
+    <script>
+        let noClickCount = 0;
+        function showLove() {
+            document.getElementById("response").innerHTML = "Yay! 💖 Can't wait to spend Valentine's with you!";
+            document.getElementById("loveGif").style.display = "block";
+            document.getElementById("startGif").style.display = "none";
+            document.getElementById("question").style.display = "none";
+            let yesButton = document.getElementById("yesButton");
+            if (yesButton) {
+                yesButton.remove();
+            }
+            let noButton = document.getElementById("noButton");
+            if (noButton) {
+                noButton.remove();
+            }
+        }
+        function moveButton() {
+            let noButton = document.getElementById("noButton");
+            let yesButton = document.getElementById("yesButton");
+            if (noButton && yesButton) {
+                let x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+                let y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+                noButton.style.left = `${x}px`;
+                noButton.style.top = `${y}px`;
+                let currentScale = parseFloat(getComputedStyle(yesButton).getPropertyValue("transform").match(/matrix\(([^,]+)/)?.[1] || "1");
+                yesButton.style.transform = `scale(${currentScale * 2})`;
+            }
+        }
+        function trackNoClicks() {
+            noClickCount++;
+            if (noClickCount >= 10) {
+                document.getElementById("noResponse").style.display = "block";
+                document.getElementById("question").style.display = "none";
+                document.getElementById("startGif").style.display = "none";
+                let yesButton = document.getElementById("yesButton");
+                if (yesButton) {
+                    yesButton.remove();
+                }
+                document.getElementById("sadGif").style.display = "block";
+                let noButton = document.getElementById("noButton");
+                if (noButton) {
+                    noButton.remove();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

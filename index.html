@@ -48,7 +48,7 @@
 </head>
 <body>
     <div class="container" id="mainContainer">
-        <img id="startGif" src="https://raw.githubusercontent.com/TroyTunner/Valentine/main/Rilakkuma%20Gif.gif" alt="Rilakkuma GIF" width="250">
+        <img id="startGif" src="https://raw.githubusercontent.com/TroyTunner/Valentine/main/Rilakkuma%20Gif.gif" onload="this.src=this.src" alt="Rilakkuma GIF" width="250">
         <h1 id="question">Will you be my Valentine? 💖</h1>
         <button id="yesButton" class="btn yes" onclick="showLove()">Yes</button>
         <button id="noButton" class="btn no" onmouseover="moveButton()" onclick="trackNoClicks()">No</button>
@@ -105,3 +105,4 @@
     </script>
 </body>
 </html>
+
